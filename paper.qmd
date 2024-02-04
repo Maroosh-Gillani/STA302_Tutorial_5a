@@ -70,9 +70,7 @@ initial_clean <-
 cleaned_data <-
   initial_clean |>
   separate(date, into = c("birth", "died"), 
-           sep = "–") |>   # PMs who have died have their birth and death years 
-  # separated by a hyphen, but we need to be careful with the hyphen as it seems 
-  # to be a slightly odd type of hyphen and we need to copy/paste it.
+           sep = "–") |>   
   mutate(
     born = str_remove_all(born, "b.[[:space:]]"),
     birth = if_else(!is.na(born), born, birth)
@@ -81,7 +79,7 @@ cleaned_data <-
   rename(born = birth) |> 
   mutate(across(c(born, died), as.integer)) |> 
   mutate(Age_at_Death = died - born) |> 
-  distinct() # Some of the PMs had two goes at it.
+  distinct() 
 
 # make a nice table
 cleaned_data |>
