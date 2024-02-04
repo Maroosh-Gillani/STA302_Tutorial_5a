@@ -1,13 +1,13 @@
 #### Preamble ####
-# Purpose: Simulates and Tests ...
+# Purpose: Simulates and Tests Australian Prime Minister birth/death dates
 # Author: Maroosh Gillani
 # Date: February 3, 2024
 # Contact: maroosh.gillani@mail.utoronto.ca
 
-# The simulation code is modified from the code provided in professor ROhan's 
+# The simulation code is modified from the code provided in professor Rohan's 
 # textbook "Telling Stories with Data": https://tellingstorieswithdata.com/07-gather.html#prime-ministers-of-the-united-kingdom
 
-# Simulation of Canadian Prime-Minister Birth/Death dates
+# Simulation of Australian Prime-Minister Birth/Death dates
 library(dplyr)
 library(babynames)
 

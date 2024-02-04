@@ -1,5 +1,5 @@
 ---
-title: "TITLE"
+title: "(Web)scraping Through the Lives of Australian Prime Ministers"
 author: "Maroosh Gillani"
 thanks: "Code and data are available at: UPDATE THIS "
 date: "23 January 2024"
@@ -9,3 +9,34 @@ number-sections: true
 bibliography: references.bib
 ---
 
+```{r, echo=false}
+# This code is modified from the code provided in professor Rohan's 
+# textbook "Telling Stories with Data": https://tellingstorieswithdata.com/07-gather.html#prime-ministers-of-the-united-kingdom
+
+# libraries
+library(ggplot2)
+library(dplyr)
+library(rvest)
+library(xml2)
+library(tidyr)
+
+# read in data about Australian prime ministers from Wikipedia
+raw_data <-
+  read_html(
+    "https://en.wikipedia.org/wiki/List_of_prime_ministers_of_Australia"
+  )
+
+# save as a html file
+write_html(raw_data, "pms.html")
+
+raw_data <- read_html("pms.html")
+
+# specifically get the table containing pm info
+parse_data_selector_gadget <-
+  raw_data |>
+  html_element(".wikitable") |>
+  html_table()
+
+head(parse_data_selector_gadget)
+
+```
