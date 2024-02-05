@@ -1,15 +1,20 @@
 ---
 title: "(Web)scraping Through the Lives of Australian Prime Ministers"
 author: "Maroosh Gillani"
-thanks: "Code and data are available at: UPDATE THIS "
+thanks: "Code and data are available at: https://github.com/Maroosh-Gillani/STA302_Tutorial_5a "
 date: "23 January 2024"
 date-format: long
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
+# Introduction
 
-```{r, echo=false}
+This paper uses the webscraping techniques taught in Telling Stories with Data [@textbook] on Wikipedia's "List of prime ministers of Australia" article [@wikipedia]
+
+# Findings
+```{r, caption="Table depicting Australian Prime Ministers and Their Years of Birth and Death, Alongside Their Age at Death.", echo=FALSE, message=FALSE}
+
 # This code is modified from the code provided in professor Rohan's 
 # textbook "Telling Stories with Data": https://tellingstorieswithdata.com/07-gather.html#prime-ministers-of-the-united-kingdom
 
@@ -83,10 +88,16 @@ cleaned_data <-
 
 # make a nice table
 cleaned_data |>
-  head() |>
   kable(
     col.names = c("Prime Minister", "Birth year", "Death year", "Age at death")
     )
+```
+
+From this table, we can see that the longest living prime minister was Gough Whitlan, who died at the age of 98 years old. On the other hand, the prime minister who lived the shortest period of time was Harold Holt, who passed away at the age of 59 years old. The most common range of age for Australian prime ministers to pass away is in their 80s, as 7 prime ministers passed away in that age range. This is closely followed by the age ranges of 70s and 90s, as both have 5 prime ministers each pass away in those age ranges. This is in line with the life expectancy (2020-2022) of Australia, which is 81.2 years for males and 85.3 years for females [@SOURCE1].
+
+```{r fig-1, fig.cap="Graph Depicting Australian Prime Ministers and How Long They Lived", echo=FALSE, message=FALSE}
+
+#| label: fig-1
 
 # making a graph
 cleaned_data |>
@@ -106,3 +117,16 @@ cleaned_data |>
   scale_color_brewer(palette = "Set1") +
   theme(legend.position = "bottom")
 ```
+As illustrated by @fig-1, it is very interesting to see that 8 Australian prime ministers are still alive. Thus, roughly 26% of prime ministers Australia has had throughout its existence are currently alive. This makes sense, considering Australia is a relatively young country, at only 122 years old constitutionally [@SOURCE2]. This could also be because Australia has had a few long serving prime ministers as well. For example, Robert Menzies served as prime minister for roughly 16 years, and John Howard spent more than 11 years as prime minister [@wikipedia].
+
+# Web Scraping
+
+## Data Source
+
+The source of the data used in this paper is Wikipedia [@wikipedia]. From the article, I specifically scraped the table of prime ministers of Australia, which included information such as their portrait, Name, Term of Office, and Political party etc.
+
+## Process
+
+For the webscraping process, I used R itself [@base], and the following packages: tidyverse [@tidyverse], and knitr [@knitr2023]. My webscraping code is a modified version of the one displayed in Telling Stories with Data [@textbook]. It is essentially the same code, but altered to suit my needs for scraping the Australian prime ministers Wikipedia page. For example, the original code required the column "Prime minister Office (Lifespan)" column from the United Kingdom Prime Ministers Wikipedia Article, whereas I required the "Name (Birth-Death) Constituency" column for this paper. My process was to just follow along the provided code and change it as needed, but this approach ended up causing me a few problems. Firstly, I should have tried to understand the code better before starting to follow along. This is because there were parts that were left for the reader to resolve themselves, such as the implementation of the clean_names function, which I struggled to realize. Thus, I ended up wasting a lot of time trying to figure out if there was a package that included this function. Another issue I ran into because of this is my lack of understanding with RegEx. The provided code used regular expressions that were suited to parse the United Kingdom prime ministers Wikipedia article specifically. On the other hand, I had to use slightly different regular expressions while parsing (for example, the needed column names were different across the UK and Australian prime minister tables). I did not realize this for a while, which caused a lot of frustration when trying to debug my code. Thus, what I would do differently next time when webscraping is: (a) understand instructions (if provided) much more clearly, and (b) go throught the web page I am scraping more in-depth so I know exactly what to look out for, and thus write my code accordingly. The webscraping process became a lot more fun when I overcame the hurdles mentioned above. It turned out that webscraping is a lot more straightforward than I initially thought (mostly due to my own oversight), which helped me gain more confidence when coding, and thus made the process a lot more fun.
+
+# References
